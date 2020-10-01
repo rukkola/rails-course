@@ -5,6 +5,8 @@
     <%= text_field_tag :name, @item.name %>
     <%= label_tag :price %>
     <%= text_field_tag :price, @item.price %>
+    <%= label_tag :desc %>
+    <%= text_field_tag :desc, @item.desc %>
     <%= submit_tag "Update", class: "btn btn-large btn-primary" %>
   <% end %>
 
