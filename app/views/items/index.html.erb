@@ -1,27 +1,29 @@
 <h2>All Item</h2>
 
 <% unless @items.empty? %>
-  <table>
+  <table class="my_table">
     <tr>
       <th>Id</th>
       <th>Name</th>
       <th>Price</th>
       <th>Description</th>
       <th>Rating</th>
+      <th>Image</th>
       <th>Delete</th>
     </tr>
-    <% @items.sort.each do |item| %>
+    <% @items.each do |item| %>
 
       <!--   <li><%= link_to item.name, "/items/#{item.id}" %></li>
     Или вариант ниже
  -->
       <tr>
-        <td><%= item.id %></td>
-        <td><%= link_to item.name, item_path(item) %></td>
-        <td><%= item.price %></td>
-        <td><%= "img" if item.desc %></td>
-        <td><%= item.votes_count %>, <%= link_to "+", upvote_item_path(item) %></td>
-        <td><%= button_to "delete", item_path(item), method: :delete %></td>
+        <th><%= item.id %></th>
+        <th><%= link_to item.name, item_path(item) %></th>
+        <th><%= item.price %></th>
+        <th><%= "img" if item.desc %></th>
+        <th><%= item.votes_count %>, <%= link_to "+", upvote_item_path(item) %></th>
+        <th><%= !item.image.nil? ? image_tag(item.image.file, width: '30px', height: '30px') : 'no img' %></th>
+        <th><%= button_to "delete", item_path(item), method: :delete %></th>
       </tr>
     <% end %>
   </table>

@@ -8,7 +8,8 @@ class ItemsController < ApplicationController
   after_action :show_info, only: %i[index]
 
   def index
-    @items = Item.all
+    @items = Item.all # можно писать условия Item.where('price > 200 OR votes_count >= 2')
+    @items = @items.includes(:image) # запросом выбирает сразу все фото, без этого на каждую фотку 1 запрос
     #render body: @items.map { |i| "#{i.name}: #{i.price}" }
   end
 
