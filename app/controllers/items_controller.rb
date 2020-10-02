@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  layout false
+  #layout false
 
   # запишем данные из консоли
   skip_before_action :verify_authenticity_token # пропускает токен, что бы его не вводить
@@ -66,12 +66,6 @@ class ItemsController < ApplicationController
   def find_item
     @item = Item.where(id: params[:id]).first
     render_404 unless @item
-  end
-
-  def admin?
-    true
-    render_403 unless params[:admin]
-    #render json: "Access denied", status: :forbidden unless params[:admin]
   end
 
   def show_info
