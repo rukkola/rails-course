@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   after_action :show_info, only: %i[index]
 
   def index
-    @items = Item.all # можно писать условия Item.where('price > 200 OR votes_count >= 2')
+    @items = Item.all.order :id # можно писать условия Item.where('price > 200 OR votes_count >= 2')
     @items = @items.includes(:image) # запросом выбирает сразу все фото, без этого на каждую фотку 1 запрос
     #render body: @items.map { |i| "#{i.name}: #{i.price}" }
   end
@@ -16,11 +16,14 @@ class ItemsController < ApplicationController
   def create
     item = Item.create(items_params)
     if item.persisted?
+      flash[:success] = 'Item was saved'
       redirect_to items_path
     else
-      render json: item.errors, status: :unprocessable_entity
+      flash.now[:error] = 'Plase fill all fields correctly'
+      render :new
+      #render json: item.errors, status: :unprocessable_entity
     end
-    end
+  end
 =begin
   def new; end
 
@@ -34,17 +37,23 @@ class ItemsController < ApplicationController
 =end
   def update
     if @item.update(items_params)
+      flash[:success] = 'Item was updated'
       redirect_to item_path
     else
-      render body: 'Page not found', status: :unprocessable_entity
+      flash.now[:error] = 'Plase fill all fields correctly'
+      render json: item.errors, status: :unprocessable_entity
+      #render body: 'Page not found', status: :unprocessable_entity
     end
   end
 
   def destroy
     if @item.destroy.destroyed?
+      flash[:success] = 'Item was deleted'
       redirect_to items_path # или '/items'
     else
-      render body: 'Page not found', status: :unprocessable_entity
+      flash[:error] = 'Item wasn^t deleted'
+      render json: item.errors, status: :unprocessable_entity
+      #render body: 'Page not found', status: :unprocessable_entity
     end
   end
 
