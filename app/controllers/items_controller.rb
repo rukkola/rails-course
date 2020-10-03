@@ -14,8 +14,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-    item = Item.create(items_params)
-    if item.persisted?
+    @item = Item.create(items_params)
+    if @item.persisted?
       flash[:success] = 'Item was saved'
       redirect_to items_path
     else
@@ -24,9 +24,11 @@ class ItemsController < ApplicationController
       #render json: item.errors, status: :unprocessable_entity
     end
   end
-=begin
-  def new; end
 
+  def new
+    @item = Item.new
+  end
+=begin
   def show
     render body: 'Page not found', status: 404 unless @item
   end
@@ -70,7 +72,7 @@ class ItemsController < ApplicationController
   private
 
   def items_params
-    params.permit(:name, :price, :desc)
+    params.require(:item).permit(:name, :price, :desc)
   end
   
   def find_item
