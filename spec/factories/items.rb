@@ -1,7 +1,9 @@
 FactoryBot.define do
   factory :item do
-    price { 50 }
-    name { 'car' }
-    desc { 'black' }
+    price  { rand 20...100 }
+    name   { Faker::Lorem.word.downcase }
+    real   { [true, false ].sample }
+    weight { rand 5...10 }
+    desc   { Faker::Lorem.word.downcase }
   end
 end
