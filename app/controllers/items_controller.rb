@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
     @item = Item.create(items_params)
     if @item.persisted?
       flash[:success] = 'Item was saved'
-      redirect_to items_path
+      redirect_to root_path #items_path
     else
       flash.now[:error] = 'Plase fill all fields correctly'
       render :new
@@ -51,7 +51,7 @@ class ItemsController < ApplicationController
   def destroy
     if @item.destroy.destroyed?
       flash[:success] = 'Item was deleted'
-      redirect_to items_path # или '/items'
+      redirect_to root_path #items_path # или '/items'
     else
       flash[:error] = 'Item wasn^t deleted'
       render json: item.errors, status: :unprocessable_entity
