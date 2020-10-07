@@ -2,10 +2,25 @@
   <h2>Create new Item</h2>
 
   <%= simple_form_for @item do |f| %>
-    <%= f.input :name, input_html: { class: "form-text" } %>
-    <%= f.input :price, input_html: { class: "form-text" }, required: true %>
-    <%= f.input :desc, label: t("item.desc"), input_html: { class: "form-text" } %>
-    <%= f.button :submit, class: "btn btn-large btn-primary" %>
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <%= f.input :name, input_html: { class: "form-control form-control-sm",
+                                         id: "colFormLabelSm"} %>
+      </div>
+      <div class="col-sm-10">
+        <%= f.input :price, input_html: { class: "form-control form-control-sm",
+                                          id: "colFormLabelSm"}, required: true %>
+      </div>
+        <div class="col-sm-10">
+          <%= f.input :desc, label: t("item.desc"),
+                      input_html: { class: "form-control form-control-sm",
+                                    id: "colFormLabelSm"} %>
+        </div>
+      <div class="col-sm-10">
+        <%= f.button :submit, class: "btn btn-secondary",
+                      style: "margin-top: 15px"%>
+      </div>
+    </div>
   <% end %>
 
   <%= render partial: "shared/email" %>

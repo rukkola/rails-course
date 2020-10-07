@@ -10,8 +10,13 @@
   </head>
 
   <body>
-    <h2 style="color: #B00100">Admin panel</h2>
-    <%= yield %>
+  <div class="jumbotron vertical-center">
+    <div class="container">
+      <h2 style="color: #B00100">Admin panel</h2>
+      <%= yield %>
+      <% render partial: "shared/email" %>
+    </div>
+  </div>
   </body>
 
   <footer>
