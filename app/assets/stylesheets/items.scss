@@ -2,3 +2,11 @@
   display: flex;
   align-items: center;
 }
+
+.deleteAction {
+  cursor: pointer;
+}
+
+.deleteAction:hover {
+  color: #B00100;
+}

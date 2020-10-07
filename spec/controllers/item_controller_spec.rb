@@ -57,9 +57,5 @@ RSpec.describe ItemsController, type: :controller do
       item.reload
       expect { subject }.to change(Item, :count).by(-1)
     end
-
-    it 'redirect to index' do
-      is_expected.to redirect_to action: :index
-    end
   end
 end
